@@ -59,3 +59,31 @@ This command permits to see the generated hooks:
 mark-devkit diagnose job --job stage3-x86_64bit --specfile jobs/stage3_x86_64.yaml
 ```
 
+## Different hooks types
+
+The hooks could be divided into two families: *inner* and *outer*.
+The *outer* are executed directly in the host; instead, the *inner*
+are executed inside the rootfs of chroot through `fchroot`.
+
+The hooks *outer* are then divided into:
+
+* outer-pre-chroot
+* outer-post-chroot
+* outer-chroot
+
+The hooks *outer-pre-chroot* are executed before executing commands
+inside the chroot to prepare the target rootfs. For example, copy the
+`meta-repo` inside the rootfs.
+The hooks *outer-chroot* and *inner-chroot* are executed in the order
+about are included in the job. The job can switch between commands
+inside the chroot and commands out from chroot.
+At the end, the hooks *outer-post-chroot* are hooks executed at the
+end before the final tarball generation.
+
+For all hooks the following variables are automatically added:
+
+* MARKDEVKIT_WORKSPACE: defined with the job workspace directory
+* MARKDEVKIT_ROOTFS: defined with the job rootfs directory
+
+All job options if defined with int or string values are automatically
+added as environment and could be used inside the hooks.
