@@ -3,7 +3,7 @@
 version: "1.0"
 
 jobs:
-- name: job1
+- name: stage3-x86_64bit
   source:
     type: http
     uri: "https://build.funtoo.org/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest.tar.xz"
