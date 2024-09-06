@@ -1,0 +1,31 @@
+hooks:
+- type: "inner-chroot"
+  name: "stage-prelude"
+  description: |
+    Prepare ego and environment
+  entrypoint:
+    - /bin/bash
+    - -c
+  # TODO: Integrate the use of the local ego fork.
+  commands:
+    - |-
+      ldconfig
+      env-update
+      # This should switch to most recent compiler:
+      gcc_num=$(gcc-config -l | grep \\[ | wc -l)
+      if [ "$gcc_num" != "1" ]; then
+        echo
+      else
+        gcc_num=1
+      fi
+      gcc-config $gcc_num || exit 97
+      # run env-update again, as gcc-config may have changed compiler, requiring this:
+      ldconfig
+      # try to fix broken /usr/src/linux symlink, if it exists:
+      if [ -L /usr/src/linux ] && [ ! -e /usr/src/linux ]; then
+        rm /usr/src/linux
+        top_link="$(cd /usr/src; ls -d linux-debian-sources* | cut -f1 )"
+        ( cd /usr/src; ln -s $top_link linux )
+      fi
+      source /etc/profile
+      ego sync --in-place
