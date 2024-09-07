@@ -2,7 +2,7 @@ hooks:
 - type: "outer-post-chroot"
   name: "cleanup-rootfs"
   description: |
-    Cleanup rootfs and 
+    Cleanup rootfs before tarball generation.
   entrypoint:
     - /bin/bash
     - -c
@@ -12,6 +12,9 @@ hooks:
       eval 'rm -rf ${MARKDEVKIT_ROOTFS}/var/log/* || true' &&
       eval 'rm -rf ${MARKDEVKIT_ROOTFS}/var/cache/* || true' &&
       eval 'rm -f ${MARKDEVKIT_ROOTFS}/etc/portage/bashrc || true'
+    # Removing meta-repo and reduce stage3 tarball
+    - >-
+      eval 'rm -rf ${MARKDEVKIT_ROOTFS}/var/git/meta-repo || true'
 
     # for now, this takes care of glibc trying to overwrite locale.gen - clean up so
     # users don't have etc-update bugging them:
