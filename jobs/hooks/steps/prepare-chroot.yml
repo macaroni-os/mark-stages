@@ -10,10 +10,12 @@ hooks:
     - |-
       mkdir -p ${MARKDEVKIT_ROOTFS}/var/tmp/cache/package || exit 1
       mkdir -p ${MARKDEVKIT_ROOTFS}/var/cache/portage/distfiles || exit 1
+      mkdir -p ${MARKDEVKIT_ROOTFS}/tmp || exit 1
     - >-
       chmod a+rx ${MARKDEVKIT_ROOTFS}/
       ${MARKDEVKIT_ROOTFS}/var
       ${MARKDEVKIT_ROOTFS}/var/tmp
       ${MARKDEVKIT_ROOTFS}/var/cache &&
       chmod a+rwx ${MARKDEVKIT_WORKSPACE}/package &&
-      chmod a+rwx ${MARKDEVKIT_WORKSPACE}/distfiles
+      chmod a+rwx ${MARKDEVKIT_WORKSPACE}/distfiles &&
+      chmod a+rwx ${MARKDEVKIT_ROOTFS}/tmp
