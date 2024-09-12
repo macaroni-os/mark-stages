@@ -1,0 +1,53 @@
+general:
+  debug: false
+  client_timeout: 0
+
+  # spinner every 30m
+  spinner_ms: 1800000
+
+  show_build_output: true
+
+# This option permits to
+# read configuration files from
+# host (when true) or inside chroot
+# (when false).
+config_from_host: false
+# On generate a fresh stage3 we
+# can ignore protected files.
+config_protect_skip: true
+system:
+  tmpdir_base: "/luetmp"
+  rootfs: /workspace/rootfs
+
+subsets:
+  enabled:
+
+box:
+  backend: fchroot
+  fchroot_opts:
+    verbose: true
+    debug: false
+
+repos_confdir:
+  - /etc/luet/repos.conf.d
+subsets_defdir:
+  - /etc/luet/subsets.def.d
+
+tar_flows:
+  max_openfiles: 300
+  copy_buffer_size: 128
+
+repositories:
+- name: "geaaru-repo-index"
+  description: "Macaroni Repository index"
+  type: "http"
+  enable: true
+  cached: true
+  priority: 1
+  urls:
+    - "https://dl.macaronios.org/repos/geaaru-repo-index"
+    - "https://cdn2.macaronios.org/repos/geaaru-repo-index"
+    - "https://macaronios.mirror.garr.it/repos/geaaru-repo-index"
+    - "https://cdn.macaronios.org/mottainai/geaaru-repo-index"
+    - "https://raw.githubusercontent.com/geaaru/repo-index/gh-pages"
+
