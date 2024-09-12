@@ -78,10 +78,13 @@ jobs:
       # Add meta-repo tagged
       - toolchain/meta-repo
       - toolchain/meta-geaaru-kit
+      # 
+      - sys-apps/findutils
 
   # Define the list of the targets
   # scripts to run over the chroot.
   hooks_files:
     - steps/prepare-chroot.yml
     - steps/stage.yml
+    - anise/prepare-anise.yml
 

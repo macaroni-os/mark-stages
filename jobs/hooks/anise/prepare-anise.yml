@@ -1,0 +1,15 @@
+hooks:
+- type: "outer-pre-chroot"
+  name: "prepare-anise"
+  description: |
+    Setup anise system configuration inside chroot.
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    - >-
+      {{- if .Values.anise_minimal | default false }}
+      cp anise/config-minimal.yaml ${MARKDEVKIT_ROOTFS}/etc/luet.yaml
+      {{- else }}
+      cp anise/config.yaml ${MARKDEVKIT_ROOTFS}/etc/luet.yaml
+      {{- end }}
