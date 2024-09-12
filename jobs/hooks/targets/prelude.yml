@@ -27,5 +27,6 @@ hooks:
         top_link="$(cd /usr/src; ls -d linux-debian-sources* | cut -f1 )"
         ( cd /usr/src; ln -s $top_link linux )
       fi
+      eselect gcc set 1
       source /etc/profile
       ego sync --in-place

@@ -1,0 +1,12 @@
+hooks:
+- type: "inner-chroot"
+  name: "check-linking"
+  description: |
+    Check binary and libraries for broken links.
+  entrypoint:
+    - /bin/bash
+    - -c
+  # TODO: Integrate the use of the local ego fork.
+  commands:
+    - >-
+      whip h linking.check

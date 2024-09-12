@@ -13,3 +13,6 @@ hooks:
       {{- else }}
       cp anise/config.yaml ${MARKDEVKIT_ROOTFS}/etc/luet.yaml
       {{- end }}
+    # Set rootfs of the chroot as /
+    - >-
+      yq w ${MARKDEVKIT_ROOTFS}/etc/luet.yaml system.rootfs / -i
