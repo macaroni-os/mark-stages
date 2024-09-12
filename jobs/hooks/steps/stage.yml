@@ -26,4 +26,8 @@ hooks:
       chown 250:250 ${MARKDEVKIT_ROOTFS}/var/git &&
       chmod 0755 ${MARKDEVKIT_ROOTFS}/var/git
 
+    # Removing file added by fchroot
+    - >-
+      rm -v ${MARKDEVKIT_ROOTFS}/etc/resolv.conf
+
 

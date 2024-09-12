@@ -1,0 +1,73 @@
+# Example of specs to build stage tarballs
+# MARK Devkit Specifications
+version: "1.0"
+
+jobs:
+- name: stage3-x86_64bit
+  source:
+    type: http
+    uri: "https://build.funtoo.org/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest.tar.xz"
+    target: /workspace/sourcer/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest-{{ now | date "2006-01-02" }}.tar.xz
+  output:
+    type: file
+    name: stage3-{{ .Values.arch }}-{{ .Values.subarch }}-{{ .Values.release }}-{{ now | date "2006-01-02" }}.tar.xz
+    dir: './output/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/{{ now | date "2006-01-02" }}/'
+
+  options:
+    branch: "mark-testing"
+    release: "mark-testing"
+    python_kit_profile: "mark"
+    arch: x86-64bit
+    subarch: generic_64
+    sync_base_url: https://github.com/macaroni-os/{repo}
+    extras:
+      - freshen
+
+  environments:
+    - key: "SHELL"
+      value: "/bin/bash"
+    - key: "MAKEOPTS"
+      value: "-j9"
+    - key: "FEATURES"
+      value: "-pid-sandbox -network-sandbox -sandbox -usersandbox -ipc-sandbox -selinux -sesandbox"
+    - key: "EMERGE_WARNING_DELAY"
+      value: "0"
+    - key: "CLEAN_DELAY"
+      value: "0"
+    - key: "EBEEP_IGNORE"
+      value: "0"
+    - key: "EPAUSE_IGNORE"
+      value: "0"
+    - key: "CONFIG_PROTECT"
+      value: "-* /etc/locale.gen /etc/ego.conf"
+    - key: "UNINSTALL_IGNORE"
+      value: "/etc/portage/*"
+    - key: "DISTDIR"
+      value: "/var/cache/portage/distfiles"
+    - key: "PKGDIR"
+      value: "/var/tmp/cache/package"
+    - key: "eopts"
+      value: "--jobs=4 --load-average=4 --keep-going=n --usepkg --with-bdeps=y --buildpkg"
+    - key: "GENTOO_MIRRORS"
+      value: "https://distfiles.macaronios.org https://dl.macaronios.org/repos/distfiles"
+
+
+  workspacedir: /workspace
+  chroot_binds:
+    - source: /workspace/package
+      target: /var/tmp/cache/package
+    - source: /workspace/distfiles
+      target: /var/cache/portage/distfiles
+    #- source: /workspace/meta-repo
+    #  target: /var/git/meta-repo
+
+  hooks_basedir: ./hooks
+  # Define the list of the targets
+  # scripts to run over the chroot.
+  hooks_files:
+    - steps/ego.yml
+    - steps/prepare-chroot.yml
+    - targets/prelude.yml
+    - targets/stage3.yml
+    - steps/stage.yml
+

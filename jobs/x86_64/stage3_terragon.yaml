@@ -1,0 +1,87 @@
+# Example of specs to build stage tarballs
+# MARK Devkit Specifications
+version: "1.0"
+
+common_specs: &common
+  hooks_basedir: ../hooks
+  output:
+    type: file
+    name: stage3-{{ .Values.arch }}-{{ .Values.subarch }}-{{ .Values.release }}-{{ now | date "2006-01-02" }}.tar.xz
+    dir: './output/terragon/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/{{ now | date "2006-01-02" }}/'
+
+  environments:
+    - key: "SHELL"
+      value: "/bin/bash"
+    - key: "MAKEOPTS"
+      value: "-j9"
+    - key: "FEATURES"
+      value: "-pid-sandbox -network-sandbox -sandbox -usersandbox -ipc-sandbox -selinux -sesandbox"
+    - key: "EMERGE_WARNING_DELAY"
+      value: "0"
+    - key: "CLEAN_DELAY"
+      value: "0"
+    - key: "EBEEP_IGNORE"
+      value: "0"
+    - key: "EPAUSE_IGNORE"
+      value: "0"
+    - key: "CONFIG_PROTECT"
+      value: "-* /etc/locale.gen /etc/ego.conf"
+    - key: "UNINSTALL_IGNORE"
+      value: "/etc/portage/*"
+    - key: "DISTDIR"
+      value: "/var/cache/portage/distfiles"
+    - key: "PKGDIR"
+      value: "/var/tmp/cache/package"
+    - key: "eopts"
+      value: "--jobs=4 --load-average=4 --keep-going=n --usepkg --with-bdeps=y --buildpkg"
+    - key: "GENTOO_MIRRORS"
+      value: "https://distfiles.macaronios.org https://dl.macaronios.org/repos/distfiles"
+
+  workspacedir: /workspace
+  chroot_binds:
+    - source: /workspace/package
+      target: /var/tmp/cache/package
+    - source: /workspace/distfiles
+      target: /var/cache/portage/distfiles
+
+
+jobs:
+- name: stage3-terragon-next
+  <<: *common
+  options:
+    branch: "next"
+    release: "next"
+    arch: x86-64bit
+    subarch: generic_64
+    sync_base_url: https://github.com/macaroni-os/{repo}
+    extras:
+      - terragon
+
+  source:
+    type: anise
+    # This path depends on execution path.
+    anise_config: anise/config.yaml
+    anise_repos:
+      - repository/mottainai-stable
+      - repository/macaroni-terragon
+      - repository/macaroni-commons
+    anise_packages:
+      - system/luet-geaaru-thin
+      - sys-apps/baselayout
+      - toolchain/base
+      - system/entities
+      - whip
+      - whip-catalog
+      - whip-profiles/macaroni
+      - virtual/sh
+      - virtual/base
+      # Add meta-repo tagged
+      - toolchain/meta-repo
+      - toolchain/meta-geaaru-kit
+
+  # Define the list of the targets
+  # scripts to run over the chroot.
+  hooks_files:
+    - steps/prepare-chroot.yml
+    - steps/stage.yml
+
