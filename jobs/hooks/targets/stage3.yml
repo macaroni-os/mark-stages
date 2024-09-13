@@ -25,12 +25,24 @@ hooks:
         eselect python cleanup
       fi
 
+    - >-
+      locale-gen &&
+      env-update
+
+    # TODO: fix this on mark profile. Macaroni use sys-libs/ncurses[tinfo] (for blender). Maybe we can change this
+    # on terragon.
+    - >-
+      eval 'mkdir -p /etc/portage/package.use || true' &&
+      echo "sys-libs/ncurses tinfo" > /etc/portage/package.use/99-macaroni-base.use
+
     - |-
+      source /etc/profile
       emerge $eopts -u1 portage || exit 1
       emerge $eopts -u1 --nodeps ego || exit 1
       export USE=""
       # handle perl upgrades
       perl-cleaner --modules || exit 1
+      emerge $eopts -e system -t -pv || exit 1
       emerge $eopts -e system || exit 1
       # hack for binutils-libs needing a rebuild for libctf.so.0.0.0 -- build from source, not package cache
       emerge -1 binutils-libs || exit 1
