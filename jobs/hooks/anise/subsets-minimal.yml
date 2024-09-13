@@ -1,0 +1,29 @@
+hooks:
+- type: "outer-pre-sourcer"
+  name: "subsets-minimal"
+  description: |
+    Check binary and libraries for broken links.
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    # Creating gcc-devel subset
+    - mkdir -p ${MARKDEVKIT_ROOTFS}/etc/luet/subsets.def.d || true
+    - |-
+      echo "
+      subsets_def:
+        gcc-devel:
+          description: \"Split gcc compiler stuff\"
+          name: \"gcc-devel\"
+          rules:
+          - ^/usr/x86_64-pc-linux-gnu/gcc-bin/11.3.0/
+          - ^/usr/lib/gcc/x86_64-pc-linux-gnu/11.3.0/plugin/include/
+          - ^/usr/lib/gcc/x86_64-pc-linux-gnu/11.3.0/include/
+          - ^/usr/lib/gcc/x86_64-pc-linux-gnu/11.3.0/finclude/omp*
+          - ^/usr/share/gcc-data/x86_64-pc-linux-gnu/11.3.0/
+          - ^/usr/libexec/gcc/x86_64-pc-linux-gnu/11.3.0
+          - ^/usr/bin/
+          packages:
+          - sys-devel-11.3.0/gcc
+      " > ${MARKDEVKIT_ROOTFS}/etc/luet/subsets.def.d/00-gcc.yaml
+
