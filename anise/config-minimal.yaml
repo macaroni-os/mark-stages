@@ -16,7 +16,7 @@ config_from_host: false
 # can ignore protected files.
 config_protect_skip: true
 system:
-  tmpdir_base: "/luetmp"
+  tmpdir_base: "/var/tmp/anise"
   rootfs: /workspace/rootfs
 
 subsets:
