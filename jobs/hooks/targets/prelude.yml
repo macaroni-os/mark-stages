@@ -8,9 +8,14 @@ hooks:
     - -c
   # TODO: Integrate the use of the local ego fork.
   commands:
+    # TODO: fix this on baselayout to support split-libs
+    - >-
+      echo "LDPATH='/lib64:/usr/lib64'" > /etc/env.d/51split &&
+      echo "PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig" >> /etc/env.d/51split
     - |-
-      ldconfig
       env-update
+      source /etc/profile
+      ldconfig
       # This should switch to most recent compiler:
       gcc_num=$(gcc-config -l | grep \\[ | wc -l)
       if [ "$gcc_num" != "1" ]; then
