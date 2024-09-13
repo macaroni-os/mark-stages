@@ -1,0 +1,10 @@
+hooks:
+- type: "inner-chroot"
+  name: "setup-geaaru-kit"
+  description: |
+    Setup geaaru-kit
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    - anise i -y meta-geaaru-kit
