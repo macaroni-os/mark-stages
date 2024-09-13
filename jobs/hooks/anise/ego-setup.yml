@@ -1,0 +1,23 @@
+hooks:
+- type: "inner-chroot"
+  name: "setup-ego-profile"
+  description: |
+    Setup ego profile.
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    - >-
+      ego profile arch {{ .Values.arch }} &&
+      ego profile build {{ .Values.release }} &&
+      ego profile subarch {{ .Values.subarch }}
+    {{- if .Values.flavor }}
+    - >-
+      ego profile flavor {{ .Values.flavor }}
+    {{- end }}
+    {{- if .Values.mix_ins }}
+    - >-
+      ego profile mix-ins {{ join " " .Values.mix_ins }}
+    {{- end }}
+
+    - ego profile show
