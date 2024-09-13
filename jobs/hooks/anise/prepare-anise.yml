@@ -11,8 +11,8 @@ hooks:
       {{- if .Values.anise_minimal | default false }}
       cp anise/config-minimal.yaml ${MARKDEVKIT_ROOTFS}/etc/luet.yaml
       {{- else }}
-      cp anise/config.yaml ${MARKDEVKIT_ROOTFS}/etc/luet.yaml
+      cp anise/config.yaml ${MARKDEVKIT_ROOTFS}/etc/luet/luet.yaml
       {{- end }}
     # Set rootfs of the chroot as /
     - >-
-      yq w ${MARKDEVKIT_ROOTFS}/etc/luet.yaml system.rootfs / -i
+      yq w ${MARKDEVKIT_ROOTFS}/etc/luet/luet.yaml system.rootfs / -i
