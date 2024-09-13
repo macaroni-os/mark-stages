@@ -6,7 +6,12 @@ hooks:
   entrypoint:
     - /bin/bash
     - -c
-  # TODO: Integrate the use of the local ego fork.
   commands:
     - >-
+      macaronictl env-update &&
+      source /etc/profile &&
       whip h linking.check
+
+    # Cleanup tree and anise cache
+    - >-
+      anise cleanup --purge-repos
