@@ -12,7 +12,7 @@ hooks:
       install -d ${MARKDEVKIT_WORKSPACE}/etc
       cat > ${MARKDEVKIT_WORKSPACE}/etc/ego.conf << EOF
       [global]
-      release = {{ .Values.release }}
+      release = {{ .Values.branch }}
       {{- if .Values.sync_base_url }}
       sync_base_url = {{ .Values.sync_base_url }}
       {{- end }}
