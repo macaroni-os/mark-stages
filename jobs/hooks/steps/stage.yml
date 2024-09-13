@@ -23,8 +23,10 @@ hooks:
 
     # Set right permitions on /var/git
     - >-
+      if [ -e ${MARKDEVKIT_ROOTFS}/var/git ] ; then
       chown 250:250 ${MARKDEVKIT_ROOTFS}/var/git &&
-      chmod 0755 ${MARKDEVKIT_ROOTFS}/var/git
+      chmod 0755 ${MARKDEVKIT_ROOTFS}/var/git ;
+      fi
 
     # Removing file added by fchroot
     - >-
