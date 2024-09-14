@@ -24,7 +24,9 @@ cp mark-devkit /usr/bin
 ```
 
 
-## Run a job
+## Getting started with mark-devkit
+
+To build your 
 
 Needed packages: `fchroot`, `ego`.
 
@@ -59,7 +61,105 @@ This command permits to see the generated hooks:
 mark-devkit diagnose job --job stage3-x86_64bit --specfile jobs/stage3_x86_64.yaml
 ```
 
-## Different hooks types
+## What is a job?
+
+The *job* of the `metro run` command is the task to generate a *stage* tarball.
+It has two major entities, a *source* and an *output* and different configuration
+attributes.
+
+The available attributes are:
+
+| Attribute Name | Attribute Description |
+|----------------|-----------------------|
+| `name` | The name of the job to use from command line cli |
+| `options`| Contains custom options that could be used by user to specify variables to use with Helm render engine. The options are custom key/values. |
+| `environments` | Contains an arrey of environment variables passed to the hooks executor. |
+| `workspacedir` | The workspace base dir used by `mark-devkit`. |
+| `chroot_binds` | Optional binds options to pass at `fchroot`. |
+| `hooks_basedir` | The base dir used to retrieve the hooks to run. If the path is relative, that path is joined with job file directory. |
+| `hooks_files` | Contains the list of files with the hooks to run. |
+
+### The source entity
+
+The *source* describes retrieving the data and files used in the starting rootfs.
+There are two different types of *source* at the moment supported: *http* and *anise*.
+The *http* source permits to fetch of a tarball (optionally compressed in .gz, .bzip2,
+.zstd or .xz) from an HTTP resource.
+
+This is an example of an http source:
+
+```yaml
+source:
+    type: http
+    uri: "https://build.funtoo.org/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest.tar.xz"
+    target: /workspace/sourcer/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest-{{ now | date "2006-01-02" }}.tar.xz
+```
+
+The fields *uri* and *target* are rendered by Helm template engine using the variables
+defined on *options* attribute.
+
+The *anise* is a particular source that is created from scratch with the installation
+of a list of binary packages available from one or more *anise* repositories. This
+means that the installed packages must be at least the minimal number of packages
+to have a working rootfs.
+
+This is an example of an anise source:
+
+```yaml
+source:
+    type: anise
+    # This path depends on execution path.
+    anise_config: anise/config.yaml
+    anise_repos:
+      - repository/mottainai-stable
+      - repository/macaroni-terragon
+      - repository/macaroni-commons
+    anise_packages:
+      - system/luet-geaaru-thin
+      - sys-apps/baselayout
+      - toolchain/base
+      - system/entities
+      - whip
+      - whip-catalog
+      - whip-profiles/macaroni
+      - app-admin/macaronictl-thin
+      - virtual/sh
+      - virtual/base
+```
+
+> NOTE: The *anise* config must be configured with the `system.rootfs` param set to the
+>       same path of the job.
+
+
+### The output entity
+
+The *output* describes what is the final file to generate from the rootfs created
+and where are been executed the hooks.
+
+The *output* describes what is the final tarball to generate from the rootfs created and where are
+been executed the hooks. At the moment the only supported type of output is *file*.
+
+This is an example of the *output* YAML specification:
+
+```yaml
+output:
+    type: file
+    name: stage3-{{ .Values.arch }}-{{ .Values.subarch }}-{{ .Values.release }}{{- if .Values.extras }}+{{- end }}{{ join "+" .Values.extras }}-{{ now | date "2006-01-02" }}.tar.xz
+    dir: '../../output/terragon/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/{{ now | date "2006-01-02" }}/'
+```
+
+The fields *name* and *dir* are rendered with the fields defined in the *options* attribute of
+the job.
+
+Could be used the command `diagnose job` to validate the rendered output of the fields:
+
+```shell
+$> mark-devkit diagnose job --specfile jobs/x86_64/stage3_terragon.yaml  --job stage3-terragon-next-minimal | grep stage3-x86
+        name: stage3-x86-64bit-generic_64-next+terragon+minimal-2024-09-14.tar.xz
+
+```
+
+### Different hooks types
 
 The hooks could be divided into two families: *inner* and *outer*.
 The *outer* are executed directly in the host; instead, the *inner*
@@ -67,10 +167,13 @@ are executed inside the rootfs of chroot through `fchroot`.
 
 The hooks *outer* are then divided into:
 
+* outer-pre-sourcer
 * outer-pre-chroot
 * outer-post-chroot
 * outer-chroot
 
+The hooks *outer-pre-sourcer* are executed at the begin before
+consumes the selected sourcer.
 The hooks *outer-pre-chroot* are executed before executing commands
 inside the chroot to prepare the target rootfs. For example, copy the
 `meta-repo` inside the rootfs.
@@ -87,3 +190,24 @@ For all hooks the following variables are automatically added:
 
 All job options if defined with int or string values are automatically
 added as environment and could be used inside the hooks.
+
+Every hook contains one or more command executed over the
+selected *entrypoint* by default set to `/bin/bash  -c`.
+
+Just a little example of the YAML:
+
+```yaml
+hooks:
+- type: "inner-chroot"
+  name: "my-first-hook"
+  description: |
+    This is my first hook
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    - >-
+      echo "Helloworld!" &&
+      echo "This is my hook!"
+```
+
