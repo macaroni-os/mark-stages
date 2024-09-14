@@ -23,6 +23,19 @@ make build
 cp mark-devkit /usr/bin
 ```
 
+## Install `mark-devkit`
+
+### M.A.R.K Stack
+
+```shell
+emerge mark-devkit
+```
+
+### Macaroni OS
+
+```shell
+anise i mark-devkit
+```
 
 ## Getting started with mark-devkit
 
