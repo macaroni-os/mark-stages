@@ -26,18 +26,25 @@ cp mark-devkit /usr/bin
 
 ## Getting started with mark-devkit
 
-To build your 
+To build your stage tarball you need to have a MARK or Macaroni rootfs with the
+following packages:
+- `fchroot` (and dependencies)
+- `ego`
+- `yq` for anise source.
 
-Needed packages: `fchroot`, `ego`.
+Clone the `mark-stages` repository:
 
 ```shell
 git clone https://github.com/macaroni-os/mark-stages.git
 
 cd mark-stages
+```
 
+and later run the `metro run` command for the selected job.
+
+```shell
 mark-devkit metro run --specfile ./jobs/stage3_x86_64.yaml --config ./etc/config.yml  \
     --job stage3-x86_64bit \
-    --cleanup=false \
     --fchroot-debug
 ```
 
@@ -50,6 +57,13 @@ These options are also helpful for devs:
   skip the download and extract phase.
 
 * `--skip-packer-phase`: This skip the final phase that create the stage3 tarball.
+
+If it's used the `--cleanup=false` option could be used `fchroot` to enter on chroot and
+analyze issues:
+
+```
+fchroot /workspace/rootfs /bin/bash
+```
 
 ## Diagnose the rendered Job hooks
 
