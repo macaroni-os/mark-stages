@@ -1,0 +1,105 @@
+# Example of specs to build stage tarballs
+# MARK Devkit Specifications
+version: "1.0"
+
+common_specs: &common
+  hooks_basedir: ../hooks
+  output:
+    type: file
+    name: stage3-{{ .Values.arch }}-{{ .Values.subarch }}-{{ .Values.release }}{{- if .Values.extras }}+{{- end }}{{ join "+" .Values.extras }}-{{ now | date "2006-01-02" }}.tar.xz
+    dir: '../../output/phoenix/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/{{ now | date "2006-01-02" }}/'
+
+  environments:
+    - key: "SHELL"
+      value: "/bin/bash"
+    - key: "MAKEOPTS"
+      value: "-j9"
+    - key: "FEATURES"
+      value: "-pid-sandbox -network-sandbox -sandbox -usersandbox -ipc-sandbox -selinux -sesandbox"
+    - key: "EMERGE_WARNING_DELAY"
+      value: "0"
+    - key: "CLEAN_DELAY"
+      value: "0"
+    - key: "EBEEP_IGNORE"
+      value: "0"
+    - key: "EPAUSE_IGNORE"
+      value: "0"
+    - key: "CONFIG_PROTECT"
+      value: "-* /etc/locale.gen /etc/ego.conf"
+    - key: "UNINSTALL_IGNORE"
+      value: "/etc/portage/*"
+    - key: "DISTDIR"
+      value: "/var/cache/portage/distfiles"
+    - key: "PKGDIR"
+      value: "/var/tmp/cache/package"
+    - key: "eopts"
+      value: "--jobs=4 --load-average=4 --keep-going=n --usepkg --with-bdeps=y --buildpkg"
+    - key: "GENTOO_MIRRORS"
+      value: "https://distfiles.macaronios.org https://dl.macaronios.org/repos/distfiles"
+
+  workspacedir: /workspace
+  chroot_binds:
+    - source: /workspace/package
+      target: /var/tmp/cache/package
+    - source: /workspace/distfiles
+      target: /var/cache/portage/distfiles
+
+
+#------------------------------------------#
+# Macaroni Terragon Stage3 Jobs
+#------------------------------------------#
+jobs:
+- name: stage3-phoenix-next-minimal
+  <<: *common
+  options:
+    branch: "next"
+    release: "next"
+    arch: x86-64bit
+    subarch: generic_64
+    sync_base_url: https://github.com/macaroni-os/{repo}
+    extras:
+      - phoenix
+      - minimal
+
+  source:
+    type: anise
+    # This path depends on execution path.
+    anise_config: anise/config-minimal.yaml
+    anise_repos:
+      - repository/mottainai-stable
+      - repository/macaroni-phoenix
+      - repository/macaroni-commons
+    anise_packages:
+      - system/luet-geaaru-thin
+      - app-misc/ca-certificates
+      - sys-apps/baselayout
+      - sys-apps/lsb-release
+      - system/entities
+      - sys-apps/shadow
+      - sys-apps/sed
+      - app-shells/bash
+      - sys-libs-2.2/glibc
+      - sys-devel-11.3.0/gcc
+      - sys-apps/coreutils
+      - sys-apps/iproute2
+      - whip
+      - whip-catalog
+      - whip-profiles/macaroni
+      - macaroni-release/phoenix
+      - virtual/sh
+      - virtual/base
+      - virtual-entities/base
+      - app-admin/macaronictl-thin
+
+      # Broken runtime deps to fix (libxml2)
+      #- app-arch/xz-utils
+
+  # Define the list of the targets
+  # scripts to run over the chroot.
+  hooks_files:
+    - steps/prepare-chroot.yml
+    - anise/subsets-minimal.yml
+    - checks/linking.yml
+    - steps/stage.yml
+    - anise/prepare-anise.yml
+
