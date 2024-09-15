@@ -20,3 +20,8 @@ hooks:
       system/entities
       toolchain/base &&
       anise cleanup --purge-repos
+
+    # Temporary until I will drop py3.7 from the tree
+    - anise rm -y dev-lang-3.7/python
+    # leave only GCC 12
+    - anise rm -y sys-devel-11.3.0/gcc
