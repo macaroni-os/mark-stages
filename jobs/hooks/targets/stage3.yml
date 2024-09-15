@@ -9,6 +9,7 @@ hooks:
   commands:
     # make sure eselect is available first. In theory, it should be on the stage1:
     - |-
+      source /etc/profile
       if ! [ -e /usr/bin/eselect ]; then
         emerge $eopts -1 app-admin/eselect || exit 15
       else
@@ -18,6 +19,7 @@ hooks:
 
     # use python3
     - |-
+      source /etc/profile
       a=$(eselect python list | sed -E -n -e '1d' -e 's/^.* (python3\.[[:digit:]]+).*$/\1/g' -e '/python3/p' | head -n1)
       if [ "$a" != "" ]
       then
@@ -26,6 +28,7 @@ hooks:
       fi
 
     - >-
+      source /etc/profile &&
       locale-gen &&
       env-update
 
@@ -34,6 +37,13 @@ hooks:
     - >-
       eval 'mkdir -p /etc/portage/package.use || true' &&
       echo "sys-libs/ncurses tinfo" > /etc/portage/package.use/99-macaroni-base.use
+
+    # Just keep this temporary to ensure the correct
+    # setup of glibc with SYMLINK_LIB=no until Macaroni will be updated.
+    # It seems Portage does something wrong without this.
+    - >-
+      source /etc/profile &&
+      emerge glibc eudev -j
 
     - |-
       source /etc/profile
