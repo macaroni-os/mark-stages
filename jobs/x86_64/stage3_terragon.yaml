@@ -183,6 +183,13 @@ jobs:
       # Temporary. We will move to gcc12 as base on terragon soon.
       - sys-devel-12.3.0/gcc
 
+      # Not installed by toolchain/base
+      - sys-apps/openrc
+      - sys-fs/eudev
+      # Install tcp-wrappers because glibc postinst
+      # try to update it. I don't like warning.
+      - sys-apps/tcp-wrappers
+
   # Define the list of the targets
   # scripts to run over the chroot.
   hooks_files:
