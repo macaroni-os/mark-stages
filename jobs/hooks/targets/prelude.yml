@@ -12,6 +12,18 @@ hooks:
     - >-
       echo "LDPATH='/lib64:/usr/lib64'" > /etc/env.d/51split &&
       echo "PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig" >> /etc/env.d/51split
+
+    # TODO: fix elog issue at whip level.
+    - |-
+      source /etc/profile
+      if ! declare -F elog >/dev/null ; then
+        elog() {
+          einfo "$@"
+        }
+      fi
+      whip h openrc.openrc_setup
+
+#      echo 'SYMLINK_LIB="no"' >> /etc/portage/make.conf
     - |-
       env-update
       source /etc/profile
