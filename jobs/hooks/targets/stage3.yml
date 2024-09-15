@@ -44,7 +44,7 @@ hooks:
     - >-
       source /etc/profile &&
       emerge glibc eudev -t -pv &&
-      emerge glibc eudev -j
+      emerge glibc eudev $eopts -j
 
     - |-
       source /etc/profile

@@ -187,9 +187,6 @@ jobs:
       # Not installed by toolchain/base
       - sys-apps/openrc
       - sys-fs/eudev
-      # Install tcp-wrappers because glibc postinst
-      # try to update it. I don't like warning.
-      - sys-apps/tcp-wrappers
 
   # Define the list of the targets
   # scripts to run over the chroot.
