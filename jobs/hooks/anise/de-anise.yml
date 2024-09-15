@@ -1,0 +1,22 @@
+hooks:
+- type: "inner-chroot"
+  name: "remove-anise-stuff"
+  description: |
+    Remove anise specific packages and
+    anise itself.
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    - >-
+      anise repo update &&
+      anise rm -y --skip-finalizers
+      whip
+      whip-catalog
+      whip-profiles/macaroni
+      app-admin/macaronictl-thin
+      virtual/sh
+      virtual/base
+      system/entities
+      toolchain/base &&
+      anise cleanup --purge-repos

@@ -152,6 +152,7 @@ jobs:
     subarch: generic_64
     flavor: core
     sync_base_url: https://github.com/macaroni-os/{repo}
+    purge_anise_db: false
     extras:
       - terragon
 
@@ -200,6 +201,7 @@ jobs:
     - extras/geaaru-kit.yml
     - targets/stage3.yml
     - checks/linking.yml
+    - anise/de-anise.yml
     - steps/stage.yml
     - anise/prepare-anise.yml
 

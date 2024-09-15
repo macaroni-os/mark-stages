@@ -43,6 +43,7 @@ hooks:
     # It seems Portage does something wrong without this.
     - >-
       source /etc/profile &&
+      emerge glibc eudev -t -pv &&
       emerge glibc eudev -j
 
     - |-
