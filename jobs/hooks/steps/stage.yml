@@ -10,11 +10,21 @@ hooks:
     - >-
       eval 'rm -rf ${MARKDEVKIT_ROOTFS}/var/tmp/* || true' &&
       eval 'rm -rf ${MARKDEVKIT_ROOTFS}/var/log/* || true' &&
-      eval 'rm -rf ${MARKDEVKIT_ROOTFS}/var/cache/* || true' &&
       eval 'rm -f ${MARKDEVKIT_ROOTFS}/etc/portage/bashrc || true'
+
+    # Exclude anise database
+    # 
     # Removing meta-repo and reduce stage3 tarball
-    - >-
+    - |-
+      {{- if .Values.purge_anise_db | default true  }}
       eval 'rm -rf ${MARKDEVKIT_ROOTFS}/var/git/meta-repo || true'
+      {{- else }}
+      for i in $(ls ${MARKDEVKIT_ROOTFS}/var/cache/) ; do
+        if [ "$i" == "luet" ] ; then continue ; fi
+        if [ "$i" == "anise" ] ; then continue ; fi
+        rm -rf ${MARKDEVKIT_ROOTFS}/$i || true
+      done
+      {{- end }}
 
     # for now, this takes care of glibc trying to overwrite locale.gen - clean up so
     # users don't have etc-update bugging them:
