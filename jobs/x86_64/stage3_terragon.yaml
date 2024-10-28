@@ -118,7 +118,7 @@ jobs:
       - sys-apps/sed
       - app-shells/bash
       - sys-libs-2.2/glibc
-      - sys-devel-11.3.0/gcc
+      - sys-devel-12.3.0/gcc
       - sys-apps/coreutils
       - sys-apps/iproute2
       - whip
@@ -162,11 +162,8 @@ jobs:
     anise_config: anise/config.yaml
     anise_repos:
       - repository/mottainai-stable
-      #- repository/macaroni-terragon
-      #- repository/macaroni-commons
-      # Temporary using testing repo for ego mark fork.
-      - repository/macaroni-terragon-testing
-      - repository/macaroni-commons-testing
+      - repository/macaroni-terragon
+      - repository/macaroni-commons
     anise_packages:
       - system/luet-geaaru-thin
       - sys-apps/baselayout
