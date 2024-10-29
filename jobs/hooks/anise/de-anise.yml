@@ -22,4 +22,5 @@ hooks:
       anise cleanup --purge-repos
 
     # Temporary until I will drop py3.7 from the tree
-    - anise rm -y dev-lang-3.7/python
+    # in all releases. Terragon is been already removed.
+    - eval 'anise rm -y dev-lang-3.7/python' || true
