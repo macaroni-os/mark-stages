@@ -212,6 +212,7 @@ jobs:
     purge_anise_db: false
     extras:
       - terragon
+      - mark-xl
 
   source:
     type: anise
