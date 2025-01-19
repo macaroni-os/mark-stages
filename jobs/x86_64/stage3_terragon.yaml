@@ -257,4 +257,62 @@ jobs:
     - steps/stage.yml
     - anise/prepare-anise.yml
 
+- name: stage3-terragon-mark-unstable
+  <<: *common
+  options:
+    branch: "mark-unstable"
+    python_kit_profile: "mark"
+    release: "mark"
+    arch: x86-64bit
+    subarch: generic_64
+    flavor: core
+    sync_base_url: https://github.com/macaroni-os/{repo}
+    purge_anise_db: false
+    extras:
+      - terragon
+      - mark-unstable
+
+  source:
+    type: anise
+    # This path depends on execution path.
+    anise_config: anise/config.yaml
+    anise_repos:
+      - repository/mottainai-stable
+      - repository/macaroni-terragon
+      - repository/macaroni-commons
+    anise_packages:
+      - system/luet-geaaru-thin
+      - sys-apps/baselayout
+      - toolchain/base
+      - app-admin/perl-cleaner
+      - app-eselect/eselect-python
+      - dev-util/pkgconf
+      - system/entities
+      - whip
+      - whip-catalog
+      - whip-profiles/macaroni
+      - app-admin/macaronictl-thin
+      - virtual/sh
+      - virtual/base
+      # Temporary. We will move to gcc12 as base on terragon soon.
+      - sys-devel-12.3.0/gcc
+
+      # Not installed by toolchain/base
+      - sys-apps/openrc
+      - sys-fs/eudev
+
+  # Define the list of the targets
+  # scripts to run over the chroot.
+  hooks_files:
+    - steps/ego.yml
+    - steps/prepare-chroot.yml
+    - targets/prelude.yml
+    - anise/ego-setup.yml
+    - extras/geaaru-kit.yml
+    - targets/stage3.yml
+    - checks/linking.yml
+    - anise/de-anise.yml
+    - steps/stage.yml
+    - anise/prepare-anise.yml
+
 
