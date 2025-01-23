@@ -56,7 +56,7 @@ cd mark-stages
 and later run the `metro run` command for the selected job.
 
 ```shell
-mark-devkit metro run --specfile ./jobs/stage3_x86_64.yaml --config ./etc/config.yml  \
+mark-devkit metro run --specfile ./jobs/x86_64/stage3_x86_64.yaml --config ./etc/config.yml  \
     --job stage3-x86_64bit \
     --fchroot-debug
 ```
