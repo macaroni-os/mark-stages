@@ -1,0 +1,10 @@
+FROM macaronios/terragon-minimal:latest-amd64 as builder
+RUN anise i -y --sync-repos tar ca-certificates repository/macaroni-distfiles xz-utils && \
+    anise i -y --sync-repos mark-iii/stage3-amd64 && \
+    anise cleanup --purge-repos
+RUN mkdir /mark && tar -C /mark -xpJf /collections/mark/stage3-mark-iii.tar.xz
+
+FROM scratch
+COPY --from=builder /mark /
+
+ENTRYPOINT ["/bin/bash"]
