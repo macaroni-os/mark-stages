@@ -51,6 +51,8 @@ hooks:
       emerge $eopts -u1 portage || exit 1
       emerge $eopts -u1 --nodeps ego || exit 1
       export USE=""
+      # Setup perl
+      whip h perl.postinst
       {{- if .Values.openssl3 | default false }}
       emerge --unmerge nghttp2 --nodeps
       emerge -1 openssl --nodeps
