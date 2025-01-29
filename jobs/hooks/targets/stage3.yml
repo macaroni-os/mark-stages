@@ -55,7 +55,7 @@ hooks:
       whip h perl.postinst
       {{- if .Values.openssl3 | default false }}
       emerge --unmerge nghttp2 --nodeps
-      emerge -1 openssl --nodeps
+      emerge -1 openssl --nodeps -j
       {{- end }}
       # handle perl upgrades
       perl-cleaner --modules || exit 1
@@ -63,6 +63,13 @@ hooks:
       emerge $eopts -e system || exit 1
       # hack for binutils-libs needing a rebuild for libctf.so.0.0.0 -- build from source, not package cache
       emerge -1 binutils-libs || exit 1
+      {{- if .Values.openssl3 | default false }}
+      # Force removing of opensslv1 libraries preserved and re-emerge the package to
+      # update the Portage database.
+      rm /usr/lib64/libssl.so.1.1 /usr/lib64/libcrypto.so.1.1
+      whip h linking.check
+      emerge -1 openssl --nodeps -j
+      {{- end }}
       # zap the world file and emerge packages
       rm -f /var/lib/portage/world || exit 2
 
