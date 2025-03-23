@@ -61,7 +61,7 @@ jobs:
     #- source: /workspace/meta-repo
     #  target: /var/git/meta-repo
 
-  hooks_basedir: ./hooks
+  hooks_basedir: ../hooks
   # Define the list of the targets
   # scripts to run over the chroot.
   hooks_files:
