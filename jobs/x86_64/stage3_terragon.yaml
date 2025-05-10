@@ -192,7 +192,6 @@ jobs:
     - steps/prepare-chroot.yml
     - targets/prelude.yml
     - anise/ego-setup.yml
-    - extras/geaaru-kit.yml
     - targets/stage3.yml
     - checks/linking.yml
     - anise/de-anise.yml
@@ -250,7 +249,6 @@ jobs:
     - steps/prepare-chroot.yml
     - targets/prelude.yml
     - anise/ego-setup.yml
-    - extras/geaaru-kit.yml
     - targets/stage3.yml
     - checks/linking.yml
     - anise/de-anise.yml
@@ -367,7 +365,6 @@ jobs:
     - steps/prepare-chroot.yml
     - targets/prelude.yml
     - anise/ego-setup.yml
-    - extras/geaaru-kit.yml
     - targets/stage3.yml
     - checks/linking.yml
     - anise/de-anise.yml
@@ -424,7 +421,6 @@ jobs:
     - steps/prepare-chroot.yml
     - targets/prelude.yml
     - anise/ego-setup.yml
-    - extras/geaaru-kit.yml
     - targets/stage3.yml
     - checks/linking.yml
     - anise/de-anise.yml
