@@ -74,8 +74,7 @@ jobs:
       - toolchain/base
       - system/entities
       - whip
-      - whip-catalog
-      - whip-profiles/macaroni
+      - sys-apps/whip-catalog
       - app-admin/macaronictl-thin
       - virtual/sh
       - virtual/base
@@ -122,8 +121,7 @@ jobs:
       - sys-apps/coreutils
       - sys-apps/iproute2
       - whip
-      - whip-catalog
-      - whip-profiles/macaroni
+      - sys-apps/whip-catalog
       - macaroni-release/terragon
       - virtual/sh
       - virtual/base
@@ -173,8 +171,7 @@ jobs:
       - dev-util/pkgconf
       - system/entities
       - whip
-      - whip-catalog
-      - whip-profiles/macaroni
+      - sys-apps/whip-catalog
       - app-admin/macaronictl-thin
       - virtual/sh
       - virtual/base
@@ -230,8 +227,7 @@ jobs:
       - dev-util/pkgconf
       - system/entities
       - whip
-      - whip-catalog
-      - whip-profiles/macaroni
+      - sys-apps/whip-catalog
       - app-admin/macaronictl-thin
       - virtual/sh
       - virtual/base
@@ -288,8 +284,7 @@ jobs:
       - dev-util/pkgconf
       - system/entities
       - whip
-      - whip-catalog
-      - whip-profiles/macaroni
+      - sys-apps/whip-catalog
       - app-admin/macaronictl-thin
       - virtual/sh
       - virtual/base
@@ -346,8 +341,7 @@ jobs:
       - dev-util/pkgconf
       - system/entities
       - whip
-      - whip-catalog
-      - whip-profiles/macaroni
+      - sys-apps/whip-catalog
       - app-admin/macaronictl-thin
       - virtual/sh
       - virtual/base
@@ -402,8 +396,7 @@ jobs:
       - dev-util/pkgconf
       - system/entities
       - whip
-      - whip-catalog
-      - whip-profiles/macaroni
+      - sys-apps/whip-catalog
       - app-admin/macaronictl-thin
       - virtual/sh
       - virtual/base
