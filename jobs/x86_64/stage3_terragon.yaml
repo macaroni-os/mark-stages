@@ -65,7 +65,7 @@ jobs:
     # This path depends on execution path.
     anise_config: anise/config.yaml
     anise_repos:
-      - repository/mottainai-stable
+      - repository/mark
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
@@ -105,7 +105,7 @@ jobs:
     # This path depends on execution path.
     anise_config: anise/config-minimal.yaml
     anise_repos:
-      - repository/mottainai-stable
+      - repository/mark
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
@@ -161,7 +161,7 @@ jobs:
     # This path depends on execution path.
     anise_config: anise/config.yaml
     anise_repos:
-      - repository/mottainai-stable
+      - repository/mark
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
@@ -218,7 +218,7 @@ jobs:
     # This path depends on execution path.
     anise_config: anise/config.yaml
     anise_repos:
-      - repository/mottainai-stable
+      - repository/mark
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
@@ -276,7 +276,7 @@ jobs:
     # This path depends on execution path.
     anise_config: anise/config.yaml
     anise_repos:
-      - repository/mottainai-stable
+      - repository/mark
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
@@ -334,7 +334,7 @@ jobs:
     # This path depends on execution path.
     anise_config: anise/config.yaml
     anise_repos:
-      - repository/mottainai-stable
+      - repository/mark
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
@@ -390,7 +390,7 @@ jobs:
     # This path depends on execution path.
     anise_config: anise/config.yaml
     anise_repos:
-      - repository/mottainai-stable
+      - repository/mark
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
