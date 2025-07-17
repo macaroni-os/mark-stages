@@ -15,4 +15,4 @@ hooks:
       {{- end }}
     # Set rootfs of the chroot as /
     - >-
-      yq w ${MARKDEVKIT_ROOTFS}/etc/luet/luet.yaml system.rootfs / -i
+      yq4 e '.system.rootfs = "/"' ${MARKDEVKIT_ROOTFS}/etc/luet/luet.yaml -i
