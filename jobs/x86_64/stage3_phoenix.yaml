@@ -79,7 +79,7 @@ jobs:
       - sys-apps/sed
       - app-shells/bash
       - sys-libs-2.2/glibc
-      - sys-devel-11.3.0/gcc
+      - sys-devel-12.3.0/gcc
       - sys-apps/coreutils
       - sys-apps/iproute2
       - whip
