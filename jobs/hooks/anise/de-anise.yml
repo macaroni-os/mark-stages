@@ -16,7 +16,7 @@ hooks:
       app-admin/macaronictl-thin
       virtual/sh
       virtual/base
-      system/entities
+      app-admin/entities
       toolchain/base &&
       anise cleanup --purge-repos
 
