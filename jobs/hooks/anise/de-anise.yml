@@ -12,8 +12,7 @@ hooks:
       anise repo update &&
       anise rm -y --skip-finalizers
       whip
-      whip-catalog
-      whip-profiles/macaroni
+      sys-apps/whip-catalog
       app-admin/macaronictl-thin
       virtual/sh
       virtual/base
