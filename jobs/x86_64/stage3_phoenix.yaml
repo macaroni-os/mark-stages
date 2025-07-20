@@ -127,7 +127,7 @@ jobs:
     anise_config: anise/config.yaml
     anise_repos:
       - repository/mark
-      - repository/macaroni-terragon
+      - repository/macaroni-phoenix
       - repository/macaroni-commons
     anise_packages:
       - app-admin/anise
