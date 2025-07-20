@@ -70,7 +70,7 @@ jobs:
       - repository/macaroni-phoenix
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - app-misc/ca-certificates
       - sys-apps/baselayout
       - sys-apps/lsb-release

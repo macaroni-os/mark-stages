@@ -69,7 +69,7 @@ jobs:
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - sys-apps/baselayout
       - toolchain/base
       - system/entities
@@ -108,7 +108,7 @@ jobs:
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - app-misc/ca-certificates
       - sys-apps/baselayout
       - sys-apps/lsb-release
@@ -163,7 +163,7 @@ jobs:
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - sys-apps/baselayout
       - toolchain/base
       - app-admin/perl-cleaner
@@ -218,7 +218,7 @@ jobs:
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - sys-apps/baselayout
       - toolchain/base
       - app-admin/perl-cleaner
@@ -274,7 +274,7 @@ jobs:
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - sys-apps/baselayout
       - toolchain/base
       - app-admin/perl-cleaner
@@ -330,7 +330,7 @@ jobs:
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - sys-apps/baselayout
       - toolchain/base
       - app-admin/perl-cleaner
@@ -384,7 +384,7 @@ jobs:
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - sys-apps/baselayout
       - toolchain/base
       - app-admin/perl-cleaner
