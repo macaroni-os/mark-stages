@@ -144,6 +144,11 @@ jobs:
       - virtual/base
       - sys-devel-12.3.0/gcc
 
+      # To avoid issues on create messagebus user/group
+      # it's a good idea to use entities and setup the base
+      # users/group of the system
+      - virtual-entities/base
+
       # Not installed by toolchain/base
       - sys-apps/openrc
       - sys-fs/eudev
