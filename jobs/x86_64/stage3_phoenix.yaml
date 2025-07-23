@@ -155,6 +155,15 @@ jobs:
       - sys-apps/openrc
       - sys-fs/eudev
 
+      # See mark-issues#481
+      # Force installation of libraries used
+      # to generate images from SVG.
+      # This permits to have these libraries
+      # in ld.so.cache and avoid issues.
+      - librsvg
+      - adwaita-icon-theme
+
+
   # Define the list of the targets
   # scripts to run over the chroot.
   hooks_files:
