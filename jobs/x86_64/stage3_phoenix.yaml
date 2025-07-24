@@ -238,6 +238,9 @@ jobs:
       - librsvg
       - adwaita-icon-theme
 
+      # A dependency bug of libmbim?
+      - sys-apps/help2man
+
 
   # Define the list of the targets
   # scripts to run over the chroot.
