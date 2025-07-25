@@ -243,6 +243,7 @@ jobs:
       # Required to build gtk-update-icon-cache
       - x11-libs-2/gdk-pixbuf
       - dev-util/gtk-update-icon-cache
+      - x11-misc/shared-mime-info
 
 
   # Define the list of the targets
