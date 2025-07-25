@@ -240,6 +240,9 @@ jobs:
 
       # A dependency bug of libmbim?
       - sys-apps/help2man
+      # Required to build gtk-update-icon-cache
+      - x11-libs-2/gdk-pixbuf
+      - dev-util/gtk-update-icon-cache
 
 
   # Define the list of the targets
