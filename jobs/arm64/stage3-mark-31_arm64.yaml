@@ -6,7 +6,8 @@ jobs:
 - name: stage3-arm64bit
   source:
     type: http
-    uri: "https://build.funtoo.org/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest.tar.xz"
+    #uri: "https://build.funtoo.org/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest.tar.xz"
+    uri: "https://build.funtoo.org/next/arm-64bit/arm64_generic/stage3-latest.tar.xz"
     target: /workspace/sourcer/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest-{{ now | date "2006-01-02" }}.tar.xz
   output:
     type: file
