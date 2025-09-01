@@ -22,7 +22,7 @@ jobs:
     extras:
       - minimal
     # Keep date as string to avoid automatic convertion in timestamp
-    coffnix_stage3_seed_date: "2025-08-09"
+    coffnix_stage3_seed_date: "2025-08-29"
 
   environments:
     - key: "SHELL"
