@@ -1,0 +1,13 @@
+hooks:
+- type: "inner-chroot"
+  name: "arm64-setup"
+  description: |
+    Remove packages from rootfs.
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    # compile evdev needs /usr/src/linux
+    - >-
+      USE="-dracut -binary"  emerge debian-sources --nodeps -j
+

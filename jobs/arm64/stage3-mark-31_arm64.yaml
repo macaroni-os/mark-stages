@@ -73,6 +73,7 @@ jobs:
   hooks_files:
     - steps/ego.yml
     - steps/prepare-chroot.yml
+    - extras/arm64-setup.yml
     - targets/prelude.yml
     - anise/ego-setup.yml
     - targets/stage3.yml
