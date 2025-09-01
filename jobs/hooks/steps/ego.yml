@@ -37,6 +37,11 @@ hooks:
       }
       run_ego sync --dest=${MARKDEVKIT_WORKSPACE}/meta-repo
 
+    # Purge /var/git/meta-repo directory inside chroot
+    # inside the tarball if present.
+    - >-
+      eval "rm -rf ${MARKDEVKIT_ROOTFS}/var/git || true"
+
     # Prepare /var/git/meta-repo directory inside chroot
     - >-
       eval "mkdir -p ${MARKDEVKIT_ROOTFS}/var/git/ || true" &&

@@ -11,11 +11,11 @@ jobs:
   output:
     type: file
     name: stage3-{{ .Values.arch }}-{{ .Values.subarch }}-{{ .Values.release }}{{- if .Values.extras }}+{{- end }}{{ join "+" .Values.extras }}-{{ now | date "2006-01-02" }}.tar.xz
-    dir: '../../output/mark-31/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/{{ now | date "2006-01-02" }}/'
+    dir: '../../output/{{ .Values.branch }}/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/{{ now | date "2006-01-02" }}/'
 
   options:
     branch: "mark-31"
-    release: "mark-31"
+    release: "mark"
     arch: arm-64bit
     subarch: arm64_generic
     sync_base_url: https://github.com/macaroni-os/{repo}
@@ -50,7 +50,7 @@ jobs:
     - key: "eopts"
       value: "--jobs=4 --load-average=4 --keep-going=n --usepkg --with-bdeps=y --buildpkg"
     - key: "GENTOO_MIRRORS"
-      value: "https://distfiles.macaronios.org https://dl.macaronios.org/repos/distfiles"
+      value: "https://distfiles.macaronios.org/mark-distfiles/ https://distfiles.macaronios.org https://dl.macaronios.org/repos/distfiles"
 
 
   workspacedir: /workspace
@@ -69,5 +69,6 @@ jobs:
     - steps/ego.yml
     - steps/prepare-chroot.yml
     - targets/prelude.yml
+    - anise/ego-setup.yml
     - targets/stage3.yml
     - steps/stage.yml
