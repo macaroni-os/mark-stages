@@ -1,0 +1,11 @@
+hooks:
+- type: "inner-chroot"
+  name: "unmerge-packages"
+  description: |
+    Remove packages from rootfs.
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    - >-
+      emerge --unmerge {{ .Values.unmerge_pkgs | join " " }}
