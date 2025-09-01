@@ -23,6 +23,11 @@ jobs:
       - minimal
     # Keep date as string to avoid automatic convertion in timestamp
     coffnix_stage3_seed_date: "2025-08-29"
+    unmerge_pkgs:
+      # We need it for Macaroni stuff
+      # but we can remove it before generate the
+      # stage3 tarball
+      - dev-lang/go
 
   environments:
     - key: "SHELL"
