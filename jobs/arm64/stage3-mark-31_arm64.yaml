@@ -20,8 +20,9 @@ jobs:
     subarch: arm64_generic
     sync_base_url: https://github.com/macaroni-os/{repo}
     extras:
-      - freshen
-    coffnix_stage3_seed_date: 2025-08-09
+      - minimal
+    # Keep date as string to avoid automatic convertion in timestamp
+    coffnix_stage3_seed_date: "2025-08-09"
 
   environments:
     - key: "SHELL"
