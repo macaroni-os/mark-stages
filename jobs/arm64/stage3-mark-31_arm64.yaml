@@ -6,22 +6,22 @@ jobs:
 - name: stage3-arm64bit
   source:
     type: http
-    #uri: "https://build.funtoo.org/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest.tar.xz"
-    uri: "https://build.funtoo.org/next/arm-64bit/arm64_generic/stage3-latest.tar.xz"
+    uri: "https://mark-os.macaronios.org/mark-stages-{{ .Values.release }}/arm64/generic_aram64/{{ .Values.coffnix_stage3_seed_date }}/stage3-generic_arm64-mark-31-{{ .Values.coffnix_stage3_seed_date }}.tar.xz"
     target: /workspace/sourcer/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/stage3-latest-{{ now | date "2006-01-02" }}.tar.xz
   output:
     type: file
-    name: stage3-{{ .Values.arch }}-{{ .Values.subarch }}-{{ .Values.release }}-{{ now | date "2006-01-02" }}.tar.xz
-    dir: './output/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/{{ now | date "2006-01-02" }}/'
+    name: stage3-{{ .Values.arch }}-{{ .Values.subarch }}-{{ .Values.release }}{{- if .Values.extras }}+{{- end }}{{ join "+" .Values.extras }}-{{ now | date "2006-01-02" }}.tar.xz
+    dir: '../../output/arm64/{{ .Values.release }}/{{ .Values.arch }}/{{ .Values.subarch }}/{{ now | date "2006-01-02" }}/'
 
   options:
     branch: "mark-31"
     release: "mark-31"
-    arch: arm-64bit
+    arch: arm64-bit
     subarch: arm64_generic
     sync_base_url: https://github.com/macaroni-os/{repo}
     extras:
       - freshen
+    coffnix_stage3_seed_date: 2025-08-09
 
   environments:
     - key: "SHELL"
@@ -70,4 +70,3 @@ jobs:
     - targets/prelude.yml
     - targets/stage3.yml
     - steps/stage.yml
-
