@@ -16,7 +16,7 @@ jobs:
   options:
     branch: "mark-31"
     release: "mark-31"
-    arch: arm64-bit
+    arch: arm-64bit
     subarch: arm64_generic
     sync_base_url: https://github.com/macaroni-os/{repo}
     extras:
