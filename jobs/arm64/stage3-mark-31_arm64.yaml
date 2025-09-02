@@ -28,12 +28,13 @@ jobs:
       # but we can remove it before generate the
       # stage3 tarball
       - dev-lang/go
+      - sys-kernel/vanilla-sources
 
   environments:
     - key: "SHELL"
       value: "/bin/bash"
     - key: "MAKEOPTS"
-      value: "-j9"
+      value: "-j3"
     - key: "FEATURES"
       value: "-pid-sandbox -network-sandbox -sandbox -usersandbox -ipc-sandbox -selinux -sesandbox"
     - key: "EMERGE_WARNING_DELAY"
@@ -53,7 +54,7 @@ jobs:
     - key: "PKGDIR"
       value: "/var/tmp/cache/package"
     - key: "eopts"
-      value: "--jobs=4 --load-average=4 --keep-going=n --usepkg --with-bdeps=y --buildpkg"
+      value: "--jobs=1 --load-average=2 --keep-going=n --usepkg --with-bdeps=y --buildpkg"
     - key: "GENTOO_MIRRORS"
       value: "https://distfiles.macaronios.org/mark-distfiles/ https://distfiles.macaronios.org https://dl.macaronios.org/repos/distfiles"
 

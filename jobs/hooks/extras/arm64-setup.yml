@@ -9,5 +9,6 @@ hooks:
   commands:
     # compile evdev needs /usr/src/linux
     - >-
-      USE="-dracut -binary"  emerge debian-sources --nodeps -j
+      eval 'mkdir -p /usr/src || true' &&
+      USE="symlink" emerge vanilla-sources -j
 
