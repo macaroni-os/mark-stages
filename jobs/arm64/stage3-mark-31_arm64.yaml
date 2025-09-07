@@ -15,6 +15,7 @@ jobs:
 
   options:
     branch: "mark-31"
+    python_kit_profile: "mark"
     release: "mark"
     arch: arm-64bit
     subarch: arm64_generic
