@@ -1,7 +1,14 @@
-FROM macaronios/terragon-minimal:latest-amd64 as builder
-RUN anise i -y --sync-repos tar ca-certificates repository/macaroni-distfiles xz-utils && \
-    anise i -y --sync-repos mark-31/stage3-arm64 && \
-    anise cleanup --purge-repos
+FROM arm64v8/alpine:latest
+RUN apk --no-cache add ca-certificates tar wget xz rsync curl
+RUN curl https://raw.githubusercontent.com/geaaru/luet/geaaru/contrib/config/get_luet_root.sh | sh && \
+ luet install -y --sync-repos repository/macaroni-distfiles && \
+ luet i -y --sync-repos mark-31/stage3-arm64 && \
+ luet cleanup --purge-repos
+
+# FROM macaronios/terragon-minimal:latest-amd64 as builder
+#RUN anise i -y --sync-repos tar ca-certificates repository/macaroni-distfiles xz-utils && \
+#    anise i -y --sync-repos mark-31/stage3-arm64 && \
+#    anise cleanup --purge-repos
 RUN mkdir /mark && tar -C /mark -xpJf /collections/mark/stage3-arm-64bit-mark-31.tar.xz
 
 FROM scratch
