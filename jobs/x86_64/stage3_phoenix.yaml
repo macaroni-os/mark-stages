@@ -266,3 +266,85 @@ jobs:
     - anise/de-anise.yml
     - steps/stage.yml
     - anise/prepare-anise.yml
+
+- name: stage3-phoenix-mark-i-kde
+  <<: *common
+  options:
+    branch: "mark-i"
+    python_kit_profile: "mark"
+    release: "mark"
+    arch: x86-64bit
+    subarch: generic_64
+    flavor: desktop
+    sync_base_url: https://github.com/macaroni-os/{repo}
+    purge_anise_db: false
+    extras:
+      - phoenix
+      - mark-i
+      - kde
+    mix_ins:
+      - X
+      - btrfs
+      - kde-plasma-5
+  source:
+    type: anise
+    # This path depends on execution path.
+    anise_config: anise/config.yaml
+    anise_repos:
+      - repository/mark
+      - repository/macaroni-phoenix
+      - repository/macaroni-commons
+    anise_packages:
+      - app-admin/anise
+      - sys-apps/baselayout
+      - toolchain/base
+      - app-admin/perl-cleaner
+      - app-eselect/eselect-python
+      - dev-util/pkgconf
+      - system/entities
+      - whip
+      - sys-apps/whip-catalog
+      - app-admin/macaronictl-thin
+      - virtual/sh
+      - virtual/base
+      - sys-devel-12.3.0/gcc
+
+      # To avoid issues on create messagebus user/group
+      # it's a good idea to use entities and setup the base
+      # users/group of the system
+      - virtual-entities/base
+      - app-arch/rpm2targz
+      - app-arch/cpio
+
+      # Not installed by toolchain/base
+      - sys-apps/openrc
+      - sys-fs/eudev
+
+      # See mark-issues#481
+      # Force installation of libraries used
+      # to generate images from SVG.
+      # This permits to have these libraries
+      # in ld.so.cache and avoid issues.
+      - librsvg
+      - adwaita-icon-theme
+
+      # A dependency bug of libmbim?
+      - sys-apps/help2man
+      # Required to build gtk-update-icon-cache
+      - x11-libs-2/gdk-pixbuf
+      - dev-util/gtk-update-icon-cache
+      - x11-misc/shared-mime-info
+
+
+  # Define the list of the targets
+  # scripts to run over the chroot.
+  hooks_files:
+    - steps/ego.yml
+    - steps/prepare-chroot.yml
+    - targets/prelude.yml
+    - anise/ego-setup.yml
+    - targets/stage3.yml
+    - checks/linking.yml
+    - anise/de-anise.yml
+    - steps/stage.yml
+    - anise/prepare-anise.yml
