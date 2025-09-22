@@ -405,6 +405,13 @@ jobs:
       - sys-apps/help2man
       - x11-misc/shared-mime-info
 
+      # Force installation of libraries used
+      # to generate images from SVG.
+      # This permits to have these libraries
+      # in ld.so.cache and avoid issues.
+      - librsvg
+      - adwaita-icon-theme
+
 
   # Define the list of the targets
   # scripts to run over the chroot.
