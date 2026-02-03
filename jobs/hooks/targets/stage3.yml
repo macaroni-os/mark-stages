@@ -57,6 +57,14 @@ hooks:
       emerge --unmerge nghttp2 --nodeps
       emerge -1 openssl --nodeps -j
       {{- end }}
+      {{- if .Values.upgrade_glib | default false }}
+      # Fixing introspection stuff before compile the rest..
+      emerge glib -t -pv || exit 1
+      emerge glib || exit 1
+      emerge gobject-introspection-common -t -pv || exit 1
+      emerge gobject-introspection-common || exit 1
+      emerge $eopts glib || exit 1
+      {{- end }}
       # handle perl upgrades
       perl-cleaner --modules || exit 1
       emerge $eopts -e system -t -pv || exit 1

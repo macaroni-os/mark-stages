@@ -348,6 +348,11 @@ jobs:
       - sys-apps/openrc
       - sys-fs/eudev
 
+      # Needed for urw-fonts
+      - cpio
+      # Needed for gdbus-codegen (maybe we need to fix deps)
+      - app-text-4.1.2/docbook-xml-dtd
+
   # Define the list of the targets
   # scripts to run over the chroot.
   hooks_files:
