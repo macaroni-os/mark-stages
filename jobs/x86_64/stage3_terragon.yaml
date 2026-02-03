@@ -320,6 +320,7 @@ jobs:
     extras:
       - terragon
       - mark-iii
+    upgrade_glib: true
 
   source:
     type: anise
