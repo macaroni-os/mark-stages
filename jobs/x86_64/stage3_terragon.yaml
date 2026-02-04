@@ -264,6 +264,7 @@ jobs:
     extras:
       - terragon
       - mark-unstable
+    upgrade_glib: true
 
   source:
     type: anise
@@ -291,6 +292,8 @@ jobs:
       # Not installed by toolchain/base
       - sys-apps/openrc
       - sys-fs/eudev
+
+      - cpio
 
   # Define the list of the targets
   # scripts to run over the chroot.
