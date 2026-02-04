@@ -276,15 +276,15 @@ jobs:
       - repository/macaroni-commons
     anise_packages:
       - app-admin/anise
+      - app-admin/entities
+      - app-admin/macaronictl
       - sys-apps/baselayout
       - toolchain/base
       - app-admin/perl-cleaner
       - app-eselect/eselect-python
       - dev-util/pkgconf
-      - system/entities
       - whip
       - sys-apps/whip-catalog
-      - app-admin/macaronictl-thin
       - virtual/sh
       - virtual/base
       - sys-devel-12.3.0/gcc

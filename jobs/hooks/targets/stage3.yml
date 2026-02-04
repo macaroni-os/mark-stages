@@ -54,7 +54,10 @@ hooks:
       USE="-introspection" emerge glib -j || exit 1
       USE="-introspection" emerge gobject-introspection -t -pv || exit 1
       USE="-introspection" emerge gobject-introspection -j || exit 1
-      emerge $eopts glib -j || exit 1
+      emerge glib -t -pv || exit 1
+      emerge glib -j || exit 1
+      emerge harfbuzz -t -pv || exit 1
+      emerge harfbuzz -j || exit 1
       {{- end }}
       emerge $eopts -u1 portage -t -pv || exit 1
       emerge $eopts -u1 portage || exit 1
