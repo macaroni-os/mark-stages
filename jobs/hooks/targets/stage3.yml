@@ -48,9 +48,17 @@ hooks:
 
     - |-
       source /etc/profile
+      {{- if .Values.upgrade_glib | default false }}
+      # Fixing introspection stuff before compile the rest..
+      USE="-introspection" emerge glib -t -pv || exit 1
+      USE="-introspection" emerge glib -j || exit 1
+      USE="-introspection" emerge gobject-introspection -t -pv || exit 1
+      USE="-introspection" emerge gobject-introspection -j || exit 1
+      emerge $eopts glib -j || exit 1
+      {{- end }}
       emerge $eopts -u1 portage -t -pv || exit 1
       emerge $eopts -u1 portage || exit 1
-      emerge $eopts -u1 --nodeps ego -t pv || exit 1
+      emerge $eopts -u1 --nodeps ego -t -pv || exit 1
       emerge $eopts -u1 --nodeps ego || exit 1
       export USE=""
       # Setup perl
@@ -58,14 +66,6 @@ hooks:
       {{- if .Values.openssl3 | default false }}
       emerge --unmerge nghttp2 --nodeps
       emerge -1 openssl --nodeps -j
-      {{- end }}
-      {{- if .Values.upgrade_glib | default false }}
-      # Fixing introspection stuff before compile the rest..
-      emerge glib -t -pv || exit 1
-      emerge glib || exit 1
-      emerge gobject-introspection-common -t -pv || exit 1
-      emerge gobject-introspection-common || exit 1
-      emerge $eopts glib || exit 1
       {{- end }}
       # handle perl upgrades
       perl-cleaner --modules || exit 1
