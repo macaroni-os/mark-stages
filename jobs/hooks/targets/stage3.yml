@@ -48,7 +48,9 @@ hooks:
 
     - |-
       source /etc/profile
+      emerge $eopts -u1 portage -t -pv || exit 1
       emerge $eopts -u1 portage || exit 1
+      emerge $eopts -u1 --nodeps ego -t pv || exit 1
       emerge $eopts -u1 --nodeps ego || exit 1
       export USE=""
       # Setup perl
