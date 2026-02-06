@@ -13,7 +13,7 @@ hooks:
       anise rm -y --skip-finalizers
       whip
       sys-apps/whip-catalog
-      app-admin/macaronictl-thin
+      app-admin/macaronictl
       virtual/sh
       virtual/base
       app-admin/entities
@@ -22,7 +22,7 @@ hooks:
 
     # Temporary until I will drop py3.7 from the tree
     # in all releases. Terragon is been already removed.
-    - eval 'anise rm -y dev-lang-3.7/python' || true
+    #- eval 'anise rm -y dev-lang-3.7/python' || true
 
     # Ensure +x permissions under /var/db directories
     # See macaroni-os/mark-issues#331

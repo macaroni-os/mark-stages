@@ -75,7 +75,7 @@ jobs:
       - system/entities
       - whip
       - sys-apps/whip-catalog
-      - app-admin/macaronictl-thin
+      - app-admin/macaronictl
       - virtual/sh
       - virtual/base
 
@@ -126,7 +126,7 @@ jobs:
       - virtual/sh
       - virtual/base
       - virtual-entities/base
-      - app-admin/macaronictl-thin
+      - app-admin/macaronictl
 
       # Broken runtime deps to fix (libxml2)
       - app-arch/xz-utils
@@ -172,7 +172,7 @@ jobs:
       - system/entities
       - whip
       - sys-apps/whip-catalog
-      - app-admin/macaronictl-thin
+      - app-admin/macaronictl
       - virtual/sh
       - virtual/base
       - sys-devel-12.3.0/gcc
@@ -227,7 +227,7 @@ jobs:
       - system/entities
       - whip
       - sys-apps/whip-catalog
-      - app-admin/macaronictl-thin
+      - app-admin/macaronictl
       - virtual/sh
       - virtual/base
       - sys-devel-12.3.0/gcc
@@ -343,7 +343,7 @@ jobs:
       - system/entities
       - whip
       - sys-apps/whip-catalog
-      - app-admin/macaronictl-thin
+      - app-admin/macaronictl
       - virtual/sh
       - virtual/base
       - sys-devel-12.3.0/gcc
@@ -402,7 +402,7 @@ jobs:
       - system/entities
       - whip
       - sys-apps/whip-catalog
-      - app-admin/macaronictl-thin
+      - app-admin/macaronictl
       - virtual/sh
       - virtual/base
       - sys-devel-12.3.0/gcc
