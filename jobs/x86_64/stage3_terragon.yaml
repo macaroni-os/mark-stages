@@ -81,10 +81,11 @@ jobs:
       - app-admin/perl-cleaner
       - app-eselect/eselect-python
       - dev-util/pkgconf
-      - system/entities
+      - app-admin/entities
+      # Comment this until new terragon-26.03 will be released.
+      #- app-admin/macaronictl
       - whip
       - sys-apps/whip-catalog
-      - app-admin/macaronictl
       - virtual/sh
       - virtual/base
       - sys-devel-12.3.0/gcc
