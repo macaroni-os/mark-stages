@@ -70,6 +70,11 @@ hooks:
       emerge --unmerge nghttp2 --nodeps
       emerge -1 openssl --nodeps -j
       {{- end }}
+      {{- if .Values.libxml2_upgrade | default false }}
+      emerge --unmerge libxml2-python --nodeps
+      emerge -1 libxml2 --nodeps -j || exit 1
+      emerge libxml2-python -j || exit 1
+      {{- end }}
       # handle perl upgrades
       perl-cleaner --modules || exit 1
       emerge $eopts -e system -t -pv || exit 1
