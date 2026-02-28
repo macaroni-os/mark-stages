@@ -60,6 +60,7 @@ jobs:
     subarch: generic_64
     flavor: core
     openssl3: true
+    libxml2_upgrade: true
     sync_base_url: https://github.com/macaroni-os/{repo}
     purge_anise_db: false
     extras:
