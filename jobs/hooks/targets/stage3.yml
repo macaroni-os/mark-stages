@@ -74,6 +74,9 @@ hooks:
       emerge --unmerge libxml2-python --nodeps
       emerge -1 libxml2 -j || exit 1
       emerge libxml2-python -j || exit 1
+      macaronictl env-update && source /etc/profile
+      # Force rebuild of gettext fixing msgfmt
+      emerge -1 sys-devel/gettext -j || exit 1
       {{- end }}
       # handle perl upgrades
       perl-cleaner --modules || exit 1
