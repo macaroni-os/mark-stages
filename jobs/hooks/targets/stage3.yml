@@ -41,10 +41,16 @@ hooks:
     # Just keep this temporary to ensure the correct
     # setup of glibc with SYMLINK_LIB=no until Macaroni will be updated.
     # It seems Portage does something wrong without this.
+    #
+    # We need to create the libxcrypt binary before merge it
+    # in order to correctly manage glibc upgrade and avoid
+    # to have Perl broken with this error:
+    # /usr/bin/perl: symbol lookup error: /lib64/libcrypt.so.1: undefined symbol: __snprintf, version GLIBC_PRIVATE
     - >-
       source /etc/profile &&
+      emerge -vB libxcrypt -j --nodeps &&
       emerge glibc eudev -t -pv &&
-      emerge glibc eudev $eopts -j
+      emerge glibc eudev libxcrypt $eopts -j
 
     - |-
       source /etc/profile
