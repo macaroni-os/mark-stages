@@ -49,7 +49,7 @@ hooks:
     - >-
       source /etc/profile &&
       emerge -vB libxcrypt -j --nodeps &&
-      emerge glibc eudev -t -pv &&
+      emerge glibc eudev libxcrypt -t -pv &&
       emerge glibc eudev libxcrypt $eopts -j
 
     - |-
