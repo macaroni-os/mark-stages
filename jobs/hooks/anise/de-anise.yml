@@ -10,13 +10,9 @@ hooks:
   commands:
     - >-
       anise repo update &&
-      anise rm -y --skip-finalizers
-      whip
-      sys-apps/whip-catalog
-      app-admin/macaronictl
+      anise rm -y --skip-finalizers --nodeps
       virtual/sh
       virtual/base
-      app-admin/entities
       toolchain/base &&
       anise cleanup --purge-repos
 
