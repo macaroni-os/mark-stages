@@ -317,6 +317,7 @@ jobs:
       - app-eselect/eselect-python
       - dev-util/pkgconf
       - app-admin/entities
+      - sed
       # Comment this until new terragon-26.03 will be released.
       #- app-admin/macaronictl
       - whip

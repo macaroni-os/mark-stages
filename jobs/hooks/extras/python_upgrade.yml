@@ -8,6 +8,7 @@ hooks:
     - -c
   commands:
     - >-
-      sed -i -e 's|python3_9|python3_10|g' funtoo/kits/python-kit/mark/make.defaults
+      sed -i -e 's|python3_9|python3_10|g'
+      /var/git/meta-repo/kits/core-kit/profiles/funtoo/kits/python-kit/mark/make.defaults
 
 
