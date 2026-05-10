@@ -1,0 +1,13 @@
+hooks:
+- type: "inner-chroot"
+  name: "python_upgrade"
+  description: |
+    Forcing migration to a new Python release.
+  entrypoint:
+    - /bin/bash
+    - -c
+  commands:
+    - >-
+      sed -i -e 's|python3_9|python3_10|g' funtoo/kits/python-kit/mark/make.defaults
+
+
