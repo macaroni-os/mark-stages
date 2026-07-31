@@ -287,7 +287,7 @@ jobs:
 - name: stage3-terragon-mark-experiment
   <<: *common
   options:
-    branch: "mark-xl"
+    branch: "mark-unstable"
     python_kit_profile: "mark"
     release: "mark"
     arch: x86-64bit
@@ -299,7 +299,7 @@ jobs:
     purge_anise_db: false
     extras:
       - terragon
-      - mark-xl
+      - mark-unstable
 
   source:
     type: anise
