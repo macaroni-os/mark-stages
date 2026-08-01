@@ -237,6 +237,7 @@ jobs:
     release: "mark"
     arch: x86-64bit
     subarch: generic_64
+    openssl3: true
     flavor: core
     sync_base_url: https://github.com/macaroni-os/{repo}
     purge_anise_db: false
