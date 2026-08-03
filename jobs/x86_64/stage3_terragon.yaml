@@ -36,6 +36,10 @@ common_specs: &common
       value: "--jobs=4 --load-average=4 --keep-going=n --usepkg --with-bdeps=y --buildpkg"
     - key: "GENTOO_MIRRORS"
       value: "https://distfiles.macaronios.org/mark-distfiles/ https://distfiles.macaronios.org https://dl.macaronios.org/repos/distfiles"
+    # Fix rstman issues setting LANG
+    # locale.Error: unsupported locale setting
+    - key: "LANG"
+      value: "C.UTF-8"
 
   workspacedir: /workspace
   chroot_binds:
@@ -298,6 +302,7 @@ jobs:
     libxml2_upgrade: true
     sync_base_url: https://github.com/macaroni-os/{repo}
     purge_anise_db: false
+    python_version2upgrade: "3.10"
     extras:
       - terragon
       - mark-unstable
@@ -338,8 +343,8 @@ jobs:
     - steps/prepare-chroot.yml
     - targets/prelude.yml
     - anise/ego-setup.yml
-    - extras/python_upgrade.yml
     - targets/stage3.yml
+    - extras/python_upgrade.yml
     - checks/linking.yml
     - anise/de-anise.yml
     - steps/stage.yml
