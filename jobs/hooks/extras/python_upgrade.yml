@@ -14,19 +14,19 @@ hooks:
     - >-
       echo '=dev-lang/python-{{ .Values.python_version2upgrade }}*' >> /etc/portage/package.unmask
     - >-
-      export PYTHON_TARGETS="python{{ .Values.python_version2upgrade | replace "." | "_" }}" &&
-      export PYTHON_SINGLE_TARGETS="python{{ .Values.python_version2upgrade | replace "." | "_" }}" &&
+      export PYTHON_TARGETS="python{{ .Values.python_version2upgrade | replace "."  "_" }}" &&
+      export PYTHON_SINGLE_TARGETS="python{{ .Values.python_version2upgrade | replace "." "_" }}" &&
       emerge -av python python-exec
     - >-
       locale-gen
     # avoid again issues with introspection and harfbuzz
     - >-
-      export PYTHON_TARGETS="python{{ .Values.python_version2upgrade | replace "." | "_" }}" &&
-      export PYTHON_SINGLE_TARGETS="python{{ .Values.python_version2upgrade | replace "." | "_" }}" &&
+      export PYTHON_TARGETS="python{{ .Values.python_version2upgrade | replace "." "_" }}" &&
+      export PYTHON_SINGLE_TARGETS="python{{ .Values.python_version2upgrade | replace "." "_" }}" &&
       emerge gobject-introspection glib --nodeps
     - >-
-      export PYTHON_TARGETS="python{{ .Values.python_version2upgrade | replace "." | "_" }}" &&
-      export PYTHON_SINGLE_TARGETS="python{{ .Values.python_version2upgrade | replace "." | "_" }}" &&
+      export PYTHON_TARGETS="python{{ .Values.python_version2upgrade | replace "." "_" }}" &&
+      export PYTHON_SINGLE_TARGETS="python{{ .Values.python_version2upgrade | replace "." "_" }}" &&
       emerge $(qlist -IC dev-python) pax-utils -j
 
 
