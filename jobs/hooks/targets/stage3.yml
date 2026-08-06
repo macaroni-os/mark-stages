@@ -38,6 +38,11 @@ hooks:
       eval 'mkdir -p /etc/portage/package.use || true' &&
       echo "sys-libs/ncurses tinfo" > /etc/portage/package.use/99-macaroni-base.use
 
+    # Ensure to upgrade linux-headers before the rest.
+    - >-
+      emerge linux-headers -t -pv &&
+      emerge linux-headers -j
+
     # Just keep this temporary to ensure the correct
     # setup of glibc with SYMLINK_LIB=no until Macaroni will be updated.
     # It seems Portage does something wrong without this.

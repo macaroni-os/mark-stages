@@ -303,6 +303,10 @@ jobs:
     sync_base_url: https://github.com/macaroni-os/{repo}
     purge_anise_db: false
     python_version2upgrade: "3.10"
+    # Always force rebuild of glib for the introspection issues
+    # with harfbuzz.
+    upgrade_glib: true
+
     extras:
       - terragon
       - mark-unstable
@@ -335,6 +339,12 @@ jobs:
       # Not installed by toolchain/base
       - sys-apps/openrc
       - sys-fs/eudev
+      # debian-headers/vanilla-headers packages use
+      # rsync for install files. To avoid issue
+      # on upgrade on linux-headers package it's
+      # better install it from anise.
+      - net-misc/rsync
+
 
   # Define the list of the targets
   # scripts to run over the chroot.
