@@ -345,7 +345,6 @@ jobs:
       # better install it from anise.
       - net-misc/rsync
 
-
   # Define the list of the targets
   # scripts to run over the chroot.
   hooks_files:
