@@ -309,7 +309,7 @@ jobs:
 
     extras:
       - terragon
-      - mark-unstable
+      - mark-experimental
 
   source:
     type: anise
