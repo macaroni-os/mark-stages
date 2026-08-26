@@ -98,6 +98,11 @@ jobs:
       # Not installed by toolchain/base
       - sys-apps/openrc
       - sys-fs/eudev
+      # debian-headers/vanilla-headers packages use
+      # rsync for install files. To avoid issue
+      # on upgrade on linux-headers package it's
+      # better install it from anise.
+      - net-misc/rsync
 
   # Define the list of the targets
   # scripts to run over the chroot.
