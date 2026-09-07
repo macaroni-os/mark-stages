@@ -307,7 +307,7 @@ jobs:
     libxml2_upgrade: true
     sync_base_url: https://github.com/macaroni-os/{repo}
     purge_anise_db: false
-    python_version2upgrade: "3.10"
+    python_version2upgrade: "3.11"
     # Always force rebuild of glib for the introspection issues
     # with harfbuzz.
     upgrade_glib: true
