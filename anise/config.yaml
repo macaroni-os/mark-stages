@@ -31,9 +31,9 @@ box:
     debug: false
 
 repos_confdir:
-  - /etc/luet/repos.conf.d
+  - /etc/anise/repos.conf.d
 subsets_defdir:
-  - /etc/luet/subsets.def.d
+  - /etc/anise/subsets.def.d
 
 tar_flows:
   max_openfiles: 300
