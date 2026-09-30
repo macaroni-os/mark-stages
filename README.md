@@ -142,14 +142,13 @@ source:
       - repository/macaroni-terragon
       - repository/macaroni-commons
     anise_packages:
-      - system/luet-geaaru-thin
+      - app-admin/anise
       - sys-apps/baselayout
       - toolchain/base
       - system/entities
       - whip
       - whip-catalog
-      - whip-profiles/macaroni
-      - app-admin/macaronictl-thin
+      - app-admin/macaronictl
       - virtual/sh
       - virtual/base
 ```

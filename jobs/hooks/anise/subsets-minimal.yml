@@ -8,7 +8,7 @@ hooks:
     - -c
   commands:
     # Creating gcc-devel subset
-    - mkdir -p ${MARKDEVKIT_ROOTFS}/etc/luet/subsets.def.d || true
+    - mkdir -p ${MARKDEVKIT_ROOTFS}/etc/anise/subsets.def.d || true
     - |-
       echo "
       subsets_def:
@@ -25,5 +25,5 @@ hooks:
           - ^/usr/bin/
           packages:
           - sys-devel-12.3.0/gcc
-      " > ${MARKDEVKIT_ROOTFS}/etc/luet/subsets.def.d/00-gcc.yaml
+      " > ${MARKDEVKIT_ROOTFS}/etc/anise/subsets.def.d/00-gcc.yaml
 
